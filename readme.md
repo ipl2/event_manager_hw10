@@ -20,17 +20,17 @@ Outcome: With these new changes, the program ensures that users are creating or 
 
 Issue 2  
 
-Problem:  
+Problem: Password was missing some additional. For instance, checks for length or symbols.  
 
-Steps:  
+Steps: In the user_schemas file, I added these missing checks in the class UserCreate(UserBase). Additionally, I had errors running saying I was on pydantic v2 so i had to adjust the code to be recognized by it. I included testings to verify the behaviors of the checks were running correctly. Alongside checking the behavior, I also checked the errors were also outputting correcty.  
 
-Outcome:  
+Outcome: These new changes allow for a more secure password that checks and include these complex changes. This enchances the users security.  
 
-[Code with new solution]()  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/main/app/schemas/user_schemas.py#L45-62)  
 
-[Code for testing new solution]()  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/main/app/tests/test_api.py#L210-238)  
 
-[Closed Issue 1 Link]()  
+[Closed Issue 1 Link](https://github.com/ip2/event_manager_hw10/issues/2)  
 
 
 
