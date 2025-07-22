@@ -189,3 +189,18 @@ async def test_list_users_unauthorized(async_client, user_token):
         headers={"Authorization": f"Bearer {user_token}"}
     )
     assert response.status_code == 403  # Forbidden, as expected for regular user
+
+# tests a taken nickname
+@pytest.mark.asyncio
+async def test_register_duplicate_nickname_fails(async_client, verified_user):
+    # Attempt to register a new user using an existing nickname
+    user_data = {
+        "nickname": verified_user.nickname,  # duplicate nickname
+        "email": "another_unique_email@example.com",  # unique email
+        "password": "StrongPass123$"
+    }
+
+    response = await async_client.post("/register/", json=user_data)
+
+    assert response.status_code == 400
+    assert "Nickname already taken" in response.json().get("detail", "")
