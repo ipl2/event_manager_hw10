@@ -12,7 +12,7 @@ Outcome: With these new changes, the program ensures that users are creating or 
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/services/user_service.py#L60-95)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api/test_users_api.py#L194-206)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/tests/test_api/test_users_api.py#L196-205)  
 
 [Closed Issue 1 Link](https://github.com/ipl2/event_manager_hw10/issues/1)  
 
@@ -26,9 +26,9 @@ Steps: In the user_schemas file, I added these missing checks in the class UserC
 
 Outcome: These new changes allow for a more secure password that checks and include these complex changes. This enchances the users security.  
 
-[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L45-62)  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#61-78)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api/test_users_api.py#L210-238)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/tests/test_api/test_users_api.py#L210-238)  
 
 [Closed Issue 2 Link](https://github.com/ipl2/event_manager_hw10/issues/3)  
 
@@ -44,7 +44,7 @@ Outcome: These coverages for updating profile no longer accepts empty strings an
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L29-56)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_schemas/test_user_schemas.py#L64-114)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/tests/test_schemas/test_user_schemas.py#L64-114)  
 
 [Closed Issue 3 Link](https://github.com/ipl2/event_manager_hw10/issues/5)  
 
@@ -60,7 +60,7 @@ Outcome: This new check ensures no duplication to occur since it now recognizes 
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/services/user_service.py#L60-98)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api/test_users_api.py#L241-255)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/tests/test_api/test_users_api.py#L241-255)  
 
 [Closed Issue 4 Link](https://github.com/ipl2/event_manager_hw10/issues/7)  
 
@@ -68,17 +68,17 @@ Outcome: This new check ensures no duplication to occur since it now recognizes 
 
 Issue 5  
 
-Problem:  
+Problem: Password was not being validated during the reset process and did not follow same security rule when validated during user registration.  
 
-Steps:  
+Steps: To include this validation during reset, logic was added and UserPasswordUpdate was reused. This schema enforces password complexity checks. This now applies during the passsword reset. Testing was added to ensure this behavior is outputting correctly. This first test checks when a password is valid to reset while the second is a invalid password.  
 
-Outcome:  
+Outcome: During the reset process, password now follows thesame checks as registration. Invalid passwords get rejected enforcing consistency of password checks.  
 
-[Code with new solution]()  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L62-78)  
 
-[Code for testing new solution]()  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/tests/test_schemas/test_user_schemas.py#L116-137)  
 
-[Closed Issue 5 Link]()  
+[Closed Issue 5 Link](https://github.com/ipl2/event_manager_hw10/issues/9)  
 
 ## Project Image Deployed to Dockerhub
 
