@@ -4,8 +4,24 @@ import secrets
 import bcrypt
 from logging import getLogger
 
+import re
+
 # Set up logging
 logger = getLogger(__name__)
+
+# moved this to security to be used and imported to user_schemas
+def validate_password_complexity(password: str) -> str:
+    if len(password) < 8:
+        raise ValueError("Password must be at least 8 characters long.")
+    if not re.search(r"[A-Z]", password):
+        raise ValueError("Password must contain at least one uppercase letter.")
+    if not re.search(r"[a-z]", password):
+        raise ValueError("Password must contain at least one lowercase letter.")
+    if not re.search(r"[0-9]", password):
+        raise ValueError("Password must contain at least one number.")
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        raise ValueError("Password must contain at least one special character.")
+    return password
 
 def hash_password(password: str, rounds: int = 12) -> str:
     """
