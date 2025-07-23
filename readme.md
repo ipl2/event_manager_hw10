@@ -36,17 +36,17 @@ Outcome: These new changes allow for a more secure password that checks and incl
 
 Issue 3  
 
-Problem:  
+Problem: There are gaps needed to be covered when updating certain fields of profile like entering empty strings and string lengths.  
 
-Steps:  
+Steps: For the class UserBase(BaseModel), I updated the lengths to nickname, first, and lastname. Bio did not have any lengths so I added minimum and max lengths for users to enter. Following that, I added an error to be raised when users enter an empty string. Testing was added to ensure these behaviors are outputting correctly in the test_schemas file.  
 
-Outcome:  
+Outcome: These coverages for updating profile no longer accepts empty strings and can not surpass certain lengths for a valid profile.  
 
-[Code with new solution]()  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L29-56)  
 
-[Code for testing new solution]()  
+[Code for testing new solution](https://github.com/ipl2/event_manager_10/blob/main/app/tests/test_user_schemas.py#L64-114)  
 
-[Closed Issue 3 Link]()    
+[Closed Issue 3 Link](https://github.com/ipl2/event_manager_hw10/issues/5)  
 
 
 
