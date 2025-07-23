@@ -10,9 +10,9 @@ Steps: Under Class UserService I changed the create class method. The changes ma
 
 Outcome: With these new changes, the program ensures that users are creating or generates a username/nickname that is unique and cannot be used by others.
 
-[Code with new solution](https://github.com/ipl2/event_manager_hw10/main/app/services/user_service.py#L60-95)  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/services/user_service.py#L60-95)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/main/app/tests/test_api.py#L194-206)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api.py#L194-206)  
 
 [Closed Issue 1 Link](https://github.com/ipl2/event_manager_hw10/issues/1)  
 
@@ -26,43 +26,27 @@ Steps: In the user_schemas file, I added these missing checks in the class UserC
 
 Outcome: These new changes allow for a more secure password that checks and include these complex changes. This enchances the users security.  
 
-[Code with new solution](https://github.com/ipl2/event_manager_hw10/main/app/schemas/user_schemas.py#L45-62)  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L45-62)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/main/app/tests/test_api.py#L210-238)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api.py#L210-238)  
 
-[Closed Issue 1 Link](https://github.com/ip2/event_manager_hw10/issues/2)  
-
-
-
-Issue 3  
-
-Problem:  
-
-Steps:  
-
-Outcome:  
-
-[Code with new solution]()  
-
-[Code for testing new solution]()  
-
-[Closed Issue 1 Link]()  
+[Closed Issue 2 Link](https://github.com/ipl2/event_manager_hw10/issues/3)  
 
 
 
 Issue 3  
 
-Problem:  
+Problem: There are gaps needed to be covered when updating certain fields of profile like entering empty strings and string lengths.  
 
-Steps:  
+Steps: For the class UserBase(BaseModel), I updated the lengths to nickname, first, and lastname. Bio did not have any lengths so I added minimum and max lengths for users to enter. Following that, I added an error to be raised when users enter an empty string. Testing was added to ensure these behaviors are outputting correctly in the test_schemas file.  
 
-Outcome:  
+Outcome: These coverages for updating profile no longer accepts empty strings and can not surpass certain lengths for a valid profile.  
 
-[Code with new solution]()  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L29-56)  
 
-[Code for testing new solution]()  
+[Code for testing new solution](https://github.com/ipl2/event_manager_10/blob/main/app/tests/test_user_schemas.py#L64-114)  
 
-[Closed Issue 1 Link]()  
+[Closed Issue 3 Link](https://github.com/ipl2/event_manager_hw10/issues/5)  
 
 
 
@@ -78,7 +62,7 @@ Outcome:
 
 [Code for testing new solution]()  
 
-[Closed Issue 1 Link]()  
+[Closed Issue 4 Link]()  
 
 
 
@@ -94,7 +78,7 @@ Outcome:
 
 [Code for testing new solution]()  
 
-[Closed Issue 1 Link]()  
+[Closed Issue 5 Link]()  
 
 ## Project Image Deployed to Dockerhub
 
