@@ -82,4 +82,10 @@ Outcome: During the reset process, password now follows thesame checks as regist
 
 ## Project Image Deployed to Dockerhub
 
+[Image](./docker_img.png)
+
 ## Reflection Paragraph
+
+This assignment helps put in perspective the role of a software QA analyst. Before diving into the assignment, I had to familiarize myself with the new functionalities. I detected several issues along the way and used my technical skills to resolve them. In addition to learning these new functionalities, I also learned about the compare and pull request from Github. This part of the assignment was a bit of a challenge, as I came across problems trying to close out my issues. My solution was starting over and realizing my mistake of pushing after merging when that had to be done after closing an issue.  The steps taken to open and then close an issue were crucial. When it came to resolving an issue, I made sure to create a separate branch everytime.  
+
+Within these branches I resolved five issues, including the one stated in the instructor's video. With each of these issues, I made sure to have a separation of concerns and place tests in their relevant files. These issues also aligned with the “specific issues to address,” targeting these problems in the code. Every change made was committed and recorded to continue in the progression of the code. There are resolutions to username validation that ensure there are no duplications, and it remains unique to one another. Password validation that followed the same checks in the registration process for the reset process. Finally, updating the profile fields also have checks to ensure empty strings are not accepted and follow a length max and min.  
