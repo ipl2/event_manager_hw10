@@ -68,3 +68,47 @@ def test_user_base_invalid_email(user_base_data_invalid):
     
     assert "value is not a valid email address" in str(exc_info.value)
     assert "john.doe.example.com" in str(exc_info.value)
+
+# tests if bio is short or empty
+def test_user_update_bio_empty_string():
+    with pytest.raises(ValidationError) as exc_info:
+        UserUpdate(bio="  ")  # whitespace only
+    assert "Field cannot be an empty string." in str(exc_info.value)
+
+
+# tests if first name is empty
+def test_user_update_first_name_empty_string():
+    with pytest.raises(ValidationError) as exc_info:
+        UserUpdate(first_name="")
+    errors = exc_info.value.errors()
+    assert any('Field cannot be an empty string.' in e['msg'] for e in errors)
+
+# tests for invalid characters
+def test_user_update_nickname_invalid_pattern():
+    with pytest.raises(ValidationError) as exc_info:
+        UserUpdate(nickname="!@#bad_nick")
+    errors = exc_info.value.errors()
+    assert any("String should match pattern" in e['msg'] for e in errors)
+
+# tests for invalid profile
+def test_user_update_invalid_profile_url():
+    with pytest.raises(ValidationError) as exc_info:
+        UserUpdate(profile_picture_url="ftp://example.com/image.jpg")
+    assert "Invalid URL format" in str(exc_info.value)
+
+# tests if validation is raised if fields are None
+def test_user_update_requires_at_least_one_field():
+    with pytest.raises(ValidationError) as exc_info:
+        UserUpdate()
+    assert "At least one field must be provided for update" in str(exc_info.value)
+
+# tests when fields are valid and passes
+def test_user_update_valid_fields():
+    update = UserUpdate(
+        bio="Developer with 5 years of experience",
+        first_name="Isabel",
+        profile_picture_url="https://example.com/profile.jpg"
+    )
+    assert update.bio == "Developer with 5 years of experience"
+    assert update.first_name == "Isabel"
+    assert update.profile_picture_url == "https://example.com/profile.jpg"
