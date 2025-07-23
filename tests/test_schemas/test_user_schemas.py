@@ -2,7 +2,7 @@ from builtins import str
 import pytest
 from pydantic import ValidationError
 from datetime import datetime
-from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest
+from app.schemas.user_schemas import UserBase, UserCreate, UserUpdate, UserResponse, UserListResponse, LoginRequest, UserPasswordReset
 from uuid import UUID
 
 # Tests for UserBase
@@ -112,3 +112,26 @@ def test_user_update_valid_fields():
     assert update.bio == "Developer with 5 years of experience"
     assert update.first_name == "Isabel"
     assert update.profile_picture_url == "https://example.com/profile.jpg"
+
+@pytest.mark.parametrize("password", [
+    "StrongPass1!",
+    "Valid$Pass123",
+    "Another#Good9"
+])
+# tests for different cases for a valid password in reset
+def test_user_password_reset_valid(password):
+    reset = UserPasswordReset(password=password)
+    assert reset.password == password
+
+# tests for different cases for a invalid password in reset
+@pytest.mark.parametrize("password", [
+    "short",
+    "nouppercase1!",
+    "NOLOWERCASE1!",
+    "NoSpecialChar123",
+    "NoNumber!"
+])
+def test_user_password_reset_invalid(password):
+    with pytest.raises(ValidationError) as exc_info:
+        UserPasswordReset(password=password)
+    assert "Password must" in str(exc_info.value)

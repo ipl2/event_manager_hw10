@@ -1,5 +1,6 @@
 from builtins import ValueError, any, bool, str
 from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
+from app.utils.security import validate_password_complexity
 from typing import Optional, List
 from datetime import datetime
 from enum import Enum
@@ -64,18 +65,18 @@ class UserCreate(UserBase):
     # adds more complexity checks for passwords
     @field_validator("password")
     @classmethod
-    def validate_password_complexity(cls, v):
-        if len(v) < 8:
-            raise ValueError("Password must be at least 8 characters long.")
-        if not re.search(r"[A-Z]", v):
-            raise ValueError("Password must contain at least one uppercase letter.")
-        if not re.search(r"[a-z]", v):
-            raise ValueError("Password must contain at least one lowercase letter.")
-        if not re.search(r"[0-9]", v):
-            raise ValueError("Password must contain at least one number.")
-        if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", v): 
-            raise ValueError("Password must contain at least one special character.")
-        return v
+    def validate_password(cls, v):
+        return validate_password_complexity(v)
+
+# new class added to include new behavior of validating password when reset
+class UserPasswordReset(BaseModel):
+    password: str = Field(..., example="NewSecure*Password123")
+
+    @field_validator("password")
+    @classmethod
+    def validate_password(cls, v):
+        return validate_password_complexity(v)
+
 
 class UserUpdate(UserBase):
     email: Optional[EmailStr] = Field(None, example="john.doe@example.com")
