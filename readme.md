@@ -52,17 +52,17 @@ Outcome: These coverages for updating profile no longer accepts empty strings an
 
 Issue 4  
 
-Problem:  
+Problem: Case sensitivity was not enforced for username/nickname uniquess allowing duplications for these edge cases.  
 
-Steps:  
+Steps: More enhancements were made for uniqueness in username/nickname by using a direct SQLAlchemy to be case sensitive. This update is found in the class method create for UserService class. There is additional testing to check this behavior will run correctly. This is located in the test_api file. There is a check for exact matches of duplication but this new test checks duplication of different casing.  
 
-Outcome:  
+Outcome: This new check ensures no duplication to occur since it now recognizes that a nickname/username like "Isabel123" and "isabel123" are the same. This input will fail and not allow this to be reused by other users.  
 
-[Code with new solution]()  
+[Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/services/user_service.py#L60-98)  
 
-[Code for testing new solution]()  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_users_api.py#L241-255)  
 
-[Closed Issue 4 Link]()  
+[Closed Issue 4 Link](https://github.com/ipl2/event_manager_hw10/issues/7)  
 
 
 
