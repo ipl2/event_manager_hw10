@@ -12,7 +12,7 @@ Outcome: With these new changes, the program ensures that users are creating or 
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/services/user_service.py#L60-95)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api.py#L194-206)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_users_api.py#L194-206)  
 
 [Closed Issue 1 Link](https://github.com/ipl2/event_manager_hw10/issues/1)  
 
@@ -28,7 +28,7 @@ Outcome: These new changes allow for a more secure password that checks and incl
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L45-62)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_api.py#L210-238)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_users_api.py#L210-238)  
 
 [Closed Issue 2 Link](https://github.com/ipl2/event_manager_hw10/issues/3)  
 
@@ -44,7 +44,7 @@ Outcome: These coverages for updating profile no longer accepts empty strings an
 
 [Code with new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/schemas/user_schemas.py#L29-56)  
 
-[Code for testing new solution](https://github.com/ipl2/event_manager_10/blob/main/app/tests/test_user_schemas.py#L64-114)  
+[Code for testing new solution](https://github.com/ipl2/event_manager_hw10/blob/main/app/tests/test_user_schemas.py#L64-114)  
 
 [Closed Issue 3 Link](https://github.com/ipl2/event_manager_hw10/issues/5)  
 
