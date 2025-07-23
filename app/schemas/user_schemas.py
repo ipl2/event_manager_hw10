@@ -24,12 +24,18 @@ def validate_url(url: Optional[str]) -> Optional[str]:
         raise ValueError('Invalid URL format')
     return url
 
+# adding a max length to nickname, lengths to first/lastname
+# bio now also has lengths to it
 class UserBase(BaseModel):
     email: EmailStr = Field(..., example="john.doe@example.com")
-    nickname: Optional[str] = Field(None, min_length=3, pattern=r'^[\w-]+$', example=generate_nickname())
-    first_name: Optional[str] = Field(None, example="John")
-    last_name: Optional[str] = Field(None, example="Doe")
-    bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
+
+    nickname: Optional[str] = Field(
+        None, min_length=3, max_length=30, 
+        pattern=r'^[\w-]+$', example=generate_nickname()
+        )
+    first_name: Optional[str] = Field(None, min_length=1, max_length=30, example="John")
+    last_name: Optional[str] = Field(None, min_length=1, max_length=30, example="Doe")
+    bio: Optional[str] = Field(None, min_length=1, max_length=500, example="Experienced software developer specializing in web applications.")
     profile_picture_url: Optional[str] = Field(None, example="https://example.com/profiles/john.jpg")
     linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
@@ -38,6 +44,16 @@ class UserBase(BaseModel):
     @classmethod
     def validate_urls(cls, v):
         return validate_url(v)
+
+# must provide a string for these fields
+    @field_validator('nickname', 'first_name', 'last_name', 'bio', mode='before')
+    @classmethod
+    def strip_and_validate_empty(cls, v):
+        if v is not None:
+            v = v.strip()
+            if len(v) == 0:
+                raise ValueError("Field cannot be an empty string.")
+        return v
     
     class Config:
         from_attributes = True
@@ -71,10 +87,13 @@ class UserUpdate(UserBase):
     linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
 
-    @model_validator(mode='before')
+    @model_validator(mode='after')
     @classmethod
     def check_at_least_one_value(cls, values):
-        if not any(values.values()):
+        if not any(
+            getattr(values, field) is not None
+            for field in ['email', 'nickname', 'first_name', 'last_name', 'bio',
+                      'profile_picture_url', 'linkedin_profile_url', 'github_profile_url']):
             raise ValueError("At least one field must be provided for update")
         return values
 
