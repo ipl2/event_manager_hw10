@@ -71,7 +71,10 @@ class UserService:
             # Check nickname uniqueness
             nickname = validated_data.get('nickname')
             if nickname:
-                if await cls.get_by_nickname(session, nickname):
+                    # getting replaced for a more unique username/nickname
+                query = select(User).where(func.lower(User.nickname) == nickname.lower())
+                result = await session.execute(query)
+                if result.scalars().first():
                     logger.error("Nickname already taken.")
                     raise NicknameAlreadyExistsException("Nickname already taken")
             else:

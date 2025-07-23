@@ -236,3 +236,20 @@ def test_password_missing_special_char():
 def test_valid_password():
     user = UserCreate(email="test@example.com", password="StrongPass1!")
     assert user.email == "test@example.com"
+
+# tests for case-insensitive behavior
+@pytest.mark.asyncio
+async def test_register_duplicate_nickname_case_insensitive_fails(async_client, verified_user):
+    # Use the same nickname but with different casing
+    nickname_with_diff_case = verified_user.nickname.swapcase()
+
+    user_data = {
+        "nickname": nickname_with_diff_case,
+        "email": "another_unique_case_email@example.com",
+        "password": "StrongPass123$"
+    }
+
+    response = await async_client.post("/register/", json=user_data)
+
+    assert response.status_code == 400
+    assert "Nickname already taken" in response.json().get("detail", "")
